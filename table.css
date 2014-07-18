@@ -1,0 +1,28 @@
+body {
+	background-color: #FEF49B;
+	margin: 0;
+	width: 700px;
+	height: 740px;
+	background-repeat: no-repeat;
+}
+header {
+	font-family: 'Gloria Hallelujah', cursive;
+    font-size: 80px;
+    float: left;
+    margin-left: 69%;
+    width: 800px;
+}
+.background {
+	float: left;
+    margin-left: 139%;
+    margin-top: -27%;
+    height: 300px;
+}
+table,th,td {
+    border: 8px solid grey;
+    border-collapse: collapse;
+    padding: 70px;
+    margin-left: 37%;
+    margin-top: 22%;
+
+}

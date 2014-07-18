@@ -1,0 +1,43 @@
+body {
+	background-color: #FEF49B;
+	margin: 0;
+	width: 700px;
+	height: 740px;
+	background-repeat: no-repeat;
+}
+header {
+	font-family: 'Gloria Hallelujah', cursive;
+    font-size: 80px;
+    float: left;
+    margin-left: 69%;
+    width: 800px;
+}
+.background {
+	float: left;
+    margin-left: 139%;
+    margin-top: -27%;
+    height: 300px;
+}
+#container {
+    height: 300px;
+    width: 350px;
+    border-collapse: collapse;
+    margin: 0;
+}
+#game {
+    height: 100px;
+    width: 100px;
+    border: 2px solid grey;
+    display: inline-block;
+    border-collapse: collapse;
+    margin: 0;
+
+}
+
+.red {
+    background: red;
+}
+
+.blue {
+    background: blue;
+}

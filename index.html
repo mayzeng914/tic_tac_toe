@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app="tttapp">
+<head>
+	<title>Tic Tac Toe</title>
+
+	<link rel="stylesheet" href="style.css">
+	<link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+	<script src="app.js"></script>
+</head>
+<body>
+	<header>Tic Tac Toe</header>
+	<div id="container" ng-controller="tttController">
+		<div id="game" ng-repeat="box in boxes track by $index" ng-click="clickIt(box)" ng-class="{red: changeRed(box), blue: changeBlue(box)}"></div>{{box}}</div>
+	<div><img class="background" src="heart.jpg"/></div>
+	<header></header>
+	
+</body>
+</html>

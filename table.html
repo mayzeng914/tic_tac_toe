@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="tttapp">
+<head>
+	<title>Tic Tac Toe</title>
+
+	<link rel="stylesheet" href="style.css">
+	<link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+	<script src="app.js"></script>
+</head>
+<body>
+	<header>Tic Tac Toe</header>
+	<div id="game" ng-controller="tttController">
+		<table>
+			<tr>
+				<td ></td>
+				<td id="box1" ng-click = changeColor("box1")></td>
+				<td id="box2"></td>
+			</tr>
+			<tr>
+				<td id="box3"></td>
+				<td id="box4"></td>
+				<td id="box5"></td>
+			</tr>
+			<tr>
+				<td id="box6"></td>
+				<td id="box7"></td>
+				<td id="box8"></td>
+			</tr>
+		</table>
+	</div>
+	<div><img class="background" src="heart.jpg"/></div>
+	<header></header>
+	
+</body>
+</html>

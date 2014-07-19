@@ -12,7 +12,7 @@
 <body>
 	<header>Tic Tac Toe</header>
 	<div id="container" ng-controller="tttController">
-		<div id="game" ng-repeat="box in boxes track by $index" ng-click="clickIt(box)" ng-class="{red: changeRed(box), blue: changeBlue(box)}"></div>{{box}}</div>
+		<div id="game" ng-repeat="box in boxes" ng-click="clickIt(box)" ng-class="{red: box.odd, blue: box.even}"></div>{{box}}</div>
 	<div><img class="background" src="heart.jpg"/></div>
 	<header></header>
 	

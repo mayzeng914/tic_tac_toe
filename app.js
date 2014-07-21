@@ -38,6 +38,22 @@ var howManyClicks = 0;
 var boxSelectedOdd = [];
 var boxSelectedEven = [];
 
+//set up an array = winning combination
+var winning = [
+//[i, i+1, i+1+1] - 1, 4, 7
+//[i, i+2, i+2+2] - 3
+//[i, i+3, i+3+3] - 1, 2, 3
+//[i, i+4, i+4+4] - 1
+    [1, 2, 3],    
+    [1, 4, 7],
+    [1, 5, 9],
+    [2, 5, 8],
+    [3, 5, 7],
+    [3, 6, 9],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+
 $scope.clickIt = function(box) {
 	// var box = {name : 1}
 
@@ -55,46 +71,33 @@ $scope.clickIt = function(box) {
 	// howManyClicks => 1
 
 	// odd check
-	    if (howManyClicks % 2 == 1){
-			box.odd = true;
+	    if (howManyClicks % 2 == 1) {
+            box.odd = true;
 			boxSelectedOdd.push(box.name);
 			boxSelectedOdd.sort();
 			console.log(boxSelectedOdd);
+            if ( (boxSelectedOdd.length === 3) && (boxSelectedOdd in winning) ) {
+                    console.log("You win!");
+            };
 	    } 
 	    else {
 			box.even = true;
 			boxSelectedEven.push(box.name);
 			boxSelectedEven.sort();
 			console.log(boxSelectedEven);
-
+            if ( (boxSelectedEven.length === 3) && (boxSelectedEven in winning) ) {
+                    console.log("You win!");
+            };
 	    }
 	}	
 };
 
-
-
 //for box.odd & box.even, set up a new var array boxSelected pulling those box.name into it, and sort it into numerical order....
 
 
+//check boxSelectedOdd.index[0] == 1, check if boxSelectedOdd.index[1] == boxSelectedOdd.index[0]+1 && boxSelected.index[2] == boxSelectedOdd.index[1]+1...
 
-
-//set up an array = winning combination
-var winning = [
-//[i, i+1, 2i+1]
-//[i, i+2, 2i+2]
-//[i, i+3, 2i+3]
-//[i, i+4, 2i+4]
-    [1, 2, 3],    
-    [1, 4, 7],
-    [1, 5, 9],
-    [2, 5, 8],
-    [3, 5, 7],
-    [3, 6, 9],
-    [4, 5, 6],
-    [7, 8, 9]
-];
-
-console.log(winning[0][0]);
+//console.log(winning[0][0]);
 
 // check each digit one by one, when detect the correct digit (1, 2, 3, 4, 7), proceed to the second digit check, etc....
 // for loop, from index[0] to index[x], x=boxSelectedOdd.length

@@ -5,31 +5,31 @@ tttapp.controller('tttController', function($scope) {
 // $scope.createdBoard 
 
 $scope.boxes = [{
-        name: 1,
+        name: [1, 1],
         clicked: false
     }, {
-        name: 2,
+        name: [1, 2],
         clicked: false
     }, {
-        name: 3,
+        name: [1, 3],
         clicked: false
     }, {
-        name: 4,
+        name: [2, 1],
         clicked: false
     }, {
-        name: 5,
+        name: [2, 2],
         clicked: false
     }, {
-        name: 6,
+        name: [2, 3],
         clicked: false
     }, {
-        name: 7,
+        name: [3, 1],
         clicked: false
     }, {
-        name: 8,
+        name: [3, 2],
         clicked: false
     }, {
-        name: 9,
+        name: [3, 3],
         clicked: false
     }];
 
@@ -39,20 +39,7 @@ var boxSelectedOdd = [];
 var boxSelectedEven = [];
 
 //set up an array = winning combination
-var winning = [
-//[i, i+1, i+1+1] - 1, 4, 7
-//[i, i+2, i+2+2] - 3
-//[i, i+3, i+3+3] - 1, 2, 3
-//[i, i+4, i+4+4] - 1
-    [1, 2, 3],    
-    [1, 4, 7],
-    [1, 5, 9],
-    [2, 5, 8],
-    [3, 5, 7],
-    [3, 6, 9],
-    [4, 5, 6],
-    [7, 8, 9]
-];
+
 
 $scope.clickIt = function(box) {
 	// var box = {name : 1}
@@ -74,19 +61,53 @@ $scope.clickIt = function(box) {
 	    if (howManyClicks % 2 == 1) {
             box.odd = true;
 			boxSelectedOdd.push(box.name);
-			boxSelectedOdd.sort();
+			//boxSelectedOdd.sort();
 			console.log(boxSelectedOdd);
-            if ( (boxSelectedOdd.length === 3) && (boxSelectedOdd in winning) ) {
-                    console.log("You win!");
+            if (boxSelectedOdd.length == 3) {
+                if (boxSelectedOdd[0][0] == boxSelectedOdd[1][0] && boxSelectedOdd[1][0] == boxSelectedOdd[2][0]) {
+                    console.log(boxSelectedOdd[0][0], boxSelectedOdd[1][0], boxSelectedOdd[2][0]);
+                    redWin();
+                    // row win situation
+                }
+                else if (boxSelectedOdd[0][1] == boxSelectedOdd[1][1] && boxSelectedOdd[1][1] == boxSelectedOdd[2][1]) {
+                    console.log(boxSelectedOdd[0][1], boxSelectedOdd[1][1], boxSelectedOdd[2][1]);
+                    redWin();
+                    // column win situation
+                }
+                else if ( (boxSelectedOdd[0][0] == boxSelectedOdd[0][1]) && (boxSelectedOdd[1][0] == boxSelectedOdd[1][1]) && (boxSelectedOdd[2][0] == boxSelectedOdd[2][1]) ) {
+                    console.log(boxSelectedOdd);
+                    redWin();
+                    // diagonal left win situation
+                }
+                else if ( (boxSelectedOdd[0][0] + boxSelectedOdd[0][1]) == 4 && (boxSelectedOdd[1][0] + boxSelectedOdd[1][1]) == 4 && (boxSelectedOdd[2][0] + boxSelectedOdd[2][1]) == 4 ) {
+                    console.log(boxSelectedOdd[0][0] + boxSelectedOdd[0][1], boxSelectedOdd[1][0] + boxSelectedOdd[1][1], boxSelectedOdd[2][0] + boxSelectedOdd[2][1], 4 );
+                    redWin();
+                    // diagonal right win situation
+                }
             };
 	    } 
 	    else {
 			box.even = true;
 			boxSelectedEven.push(box.name);
-			boxSelectedEven.sort();
+			//boxSelectedEven.sort();
 			console.log(boxSelectedEven);
-            if ( (boxSelectedEven.length === 3) && (boxSelectedEven in winning) ) {
-                    console.log("You win!");
+            if (boxSelectedEven.length == 3) {
+                if (boxSelectedEven[0][0] == boxSelectedEven[1][0] && boxSelectedEven[1][0] == boxSelectedEven[2][0]) {
+                    blueWin();
+                    // row win situation
+                }
+                else if (boxSelectedEven[0][1] == boxSelectedEven[1][1] && boxSelectedEven[1][1] == boxSelectedEven[2][1]) {
+                    blueWin();
+                    // column win situation
+                }
+                else if ( (boxSelectedEven[0][0] == boxSelectedEven[0][1]) && (boxSelectedEven[1][0] == boxSelectedEven[1][1]) && (boxSelectedEven[2][0] == boxSelectedEven[2][1]) ) {
+                    blueWin();
+                    // diagonal left win situation
+                }
+                else if ( (boxSelectedEven[0][0] + boxSelectedEven[0][1]) == 4 && (boxSelectedEven[1][0] + boxSelectedEven[1][1]) == 4 && (boxSelectedEven[2][0] + boxSelectedEven[2][1]) == 4 ) {
+                    blueWin();
+                    // diagonal right win situation
+                }
             };
 	    }
 	}	
@@ -124,6 +145,14 @@ $scope.clickIt = function(box) {
 
 
 //click = 5, check winning parttern, if not, transfer them into i sth....
+
+redWin = function () {
+    alert("Red win!");
+};
+
+blueWin = function () {
+    alert("Blue win!");
+};
 
 
 

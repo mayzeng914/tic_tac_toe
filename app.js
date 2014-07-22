@@ -80,7 +80,7 @@ $scope.clickIt = function(box) {
                     // diagonal left win situation
                 }
                 else if ( (boxSelectedOdd[0][0] + boxSelectedOdd[0][1]) == 4 && (boxSelectedOdd[1][0] + boxSelectedOdd[1][1]) == 4 && (boxSelectedOdd[2][0] + boxSelectedOdd[2][1]) == 4 ) {
-                    console.log(boxSelectedOdd[0][0] + boxSelectedOdd[0][1], boxSelectedOdd[1][0] + boxSelectedOdd[1][1], boxSelectedOdd[2][0] + boxSelectedOdd[2][1], 4 );
+                    console.log(boxSelectedOdd[0][0] + boxSelectedOdd[0][1], boxSelectedOdd[1][0] + boxSelectedOdd[1][1], boxSelectedOdd[2][0] + boxSelectedOdd[2][1] );
                     redWin();
                     // diagonal right win situation
                 }

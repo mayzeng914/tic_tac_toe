@@ -15,7 +15,7 @@ header {
 .background {
 	float: left;
     margin-left: 139%;
-    margin-top: -27%;
+    margin-top: 13%;
     height: 300px;
 }
 #container {
@@ -23,6 +23,7 @@ header {
     width: 350px;
     border-collapse: collapse;
     margin: 0;
+    margin-left: 82%;
 }
 #game {
     height: 100px;

@@ -9,13 +9,13 @@ header {
 	font-family: 'Gloria Hallelujah', cursive;
     font-size: 80px;
     float: left;
-    margin-left: 69%;
+    margin-left: 82%;
     width: 800px;
 }
 .background {
 	float: left;
-    margin-left: 139%;
-    margin-top: 13%;
+    margin-left: 158%;
+    margin-top: -15%;
     height: 300px;
 }
 #container {
@@ -23,22 +23,23 @@ header {
     width: 350px;
     border-collapse: collapse;
     margin: 0;
-    margin-left: 82%;
+    margin-left: 92%;
 }
-#game {
+.game {
     height: 100px;
     width: 100px;
-    border: 2px solid grey;
+    border: 5px solid grey;
+    float: left;
     display: inline-block;
     border-collapse: collapse;
-    margin: 0;
-
+    margin: 1%;
+    padding: 0;
 }
 
-.red {
-    background: red;
+.pink {
+    background: pink;
 }
 
 .blue {
-    background: blue;
+    background: lightblue;
 }

@@ -7,12 +7,14 @@
 	<link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
 
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
-	<script src="app.js"></script>
+	<script src="third_plan.js"></script>
+	<script firebase></script>
+	<script angularfire></script>
 </head>
 <body>
 	<header>Tic Tac Toe</header>
-	<div id="container" ng-controller="tttController">
-		<div id="game" ng-repeat="box in boxes" ng-click="clickIt(box)" ng-class="{red: box.odd, blue: box.even}"></div>{{box}}</div>
+	<div id="container" ng-controller="tttController" ng-model="boxes">
+		<div class="game" ng-repeat="box in boxes" ng-click="clickIt(box)" ng-class="{pink: box.odd, blue: box.even}"></div>{{box}}</div>
 	<div><img class="background" src="heart.jpg"/></div>
 	<header></header>
 	

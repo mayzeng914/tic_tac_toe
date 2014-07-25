@@ -7,31 +7,22 @@ tttapp.controller('tttController', function($scope, $timeout) {
 
 // $scope.createdBoard 
 $scope.boxes = [{
-        name: 0, 
         clicked: false
     }, {
-        name: 1, 
-        clicked: false,
-    }, {
-        name: 2, 
-        clicked: false,
-    }, {
-        name: 3, 
+        clicked: false
+    }, { 
         clicked: false
     }, {
-        name: 4, 
+        clicked: false
+    }, { 
         clicked: false
     }, {
-        name: 5, 
         clicked: false
     }, {
-        name: 6, 
         clicked: false
     }, {
-        name: 7, 
         clicked: false
     }, {
-        name: 8, 
         clicked: false
     }];
 
@@ -42,7 +33,6 @@ var howManyClicks = 0;
 
 
 $scope.clickIt = function(box) {
-
 	// if our box has been clicked if box.clicked
 	// equal true
 			// Then do nothing, don't increment, etc
@@ -54,9 +44,9 @@ $scope.clickIt = function(box) {
 	if (box.clicked == false) {
 		box.clicked = true;
 		howManyClicks++;
-	// howManyClicks => 1
+	    // howManyClicks => 1
 
-	// odd check
+	    // odd check
 	    if (howManyClicks % 2 == 1) {
             box.odd = true; 
             //check each row of the first player
@@ -143,16 +133,21 @@ $scope.clickIt = function(box) {
 pinkWin = function () {
     $timeout(function() {
          alert("Pink win!");
-    }, 700); 
+         $scope.clickIt = false;
+    }, 300); 
 };
 
 blueWin = function () {
    $timeout(function() {
          alert("Blue win!");
-    }, 700); 
+         $scope.clickIt = false;
+    }, 300); 
 };
 
-//button: wanna play again? (reset the page)
+//button: wanna play again? (reload the page)
+$scope.clickToReload = function() {
+    window.location.reload();
+};
 //firebase
 //extra: animation of clicking; color choosing and player name choosing; game record (how many recend round? how many times per player win?)
 

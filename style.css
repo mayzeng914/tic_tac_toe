@@ -25,7 +25,25 @@ header {
     margin: 0;
     margin-left: 92%;
 }
-.game {
+#data {
+    float: left;
+    margin-left: -108%;
+}
+#playAgain {
+    background-color: #FEF49B;
+    border-radius: 25px;
+    border: 0;
+    text-shadow: 1px -1px;
+    font-family: 'Gloria Hallelujah', cursive;
+    color: #EB1B28;
+    font-size: 19px;
+    padding: 11px;
+}
+#playAgain:hover {
+    background: grey;
+    filter: alpha(opacity=20);
+}
+#game {
     height: 100px;
     width: 100px;
     border: 5px solid grey;
@@ -34,6 +52,9 @@ header {
     border-collapse: collapse;
     margin: 1%;
     padding: 0;
+}
+#game.ng-scope:hover {
+    background: white;
 }
 
 .pink {

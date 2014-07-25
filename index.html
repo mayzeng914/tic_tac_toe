@@ -14,7 +14,10 @@
 <body>
 	<header>Tic Tac Toe</header>
 	<div id="container" ng-controller="tttController" ng-model="boxes">
-		<div class="game" ng-repeat="box in boxes" ng-click="clickIt(box)" ng-class="{pink: box.odd, blue: box.even}"></div>{{box}}</div>
+		<div id="data">
+			<button id="playAgain" ng-click="clickToReload() | filter: clickIt == false">Let's start it!</button>
+		</div>
+		<div id="game" ng-repeat="box in boxes" ng-click="clickIt(box)" ng-class="{pink: box.odd, blue: box.even}"></div>{{box}}</div>
 	<div><img class="background" src="heart.jpg"/></div>
 	<header></header>
 	

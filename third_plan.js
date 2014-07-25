@@ -1,9 +1,11 @@
-var tttapp = angular.module('tttapp', []);
+var tttapp = angular.module('tttapp', ["firebase"]);
 
-tttapp.controller('tttController', function($scope, $timeout) {
+tttapp.controller('tttController', function($scope, $timeout, $firebase) {
 
-//$scope.remoteBoxes = 
-//  $firebase (new Firebase("") + /remoteBoxes);
+var firebaseRef = new Firebase("https://shining-fire-3332.firebaseio.com/");
+
+$scope.remoteBoxesContainer = 
+    $firebase(new Firebase("https://shining-fire-3332.firebaseio.com" + '/remoteBoxesContainer')) ;
 
 // $scope.createdBoard 
 $scope.boxes = [{
@@ -26,8 +28,14 @@ $scope.boxes = [{
         clicked: false
     }];
 
-//$scope.remoteBoxes.$bind($scope, "boxes");
-//$scope.$watch('boxes')
+$scope.boxesContainer = {
+    boxList: $scope.boxes
+};
+
+$scope.remoteBoxesContainer.$bind($scope, "boxesContainer");
+$scope.$watch('boxesContainer', function() {
+    console.log('things changed!');
+});
 
 var howManyClicks = 0;
 
@@ -146,7 +154,12 @@ blueWin = function () {
 
 //button: wanna play again? (reload the page)
 $scope.clickToReload = function() {
-    window.location.reload();
+    // window.location.reload();
+    for ( i=0; i < $scope.boxes.length; i++ ) {
+        $scope.boxes[i].clicked = false;
+        howManyClicks = 0;
+    }
+    console.log('hello');
 };
 //firebase
 //extra: animation of clicking; color choosing and player name choosing; game record (how many recend round? how many times per player win?)

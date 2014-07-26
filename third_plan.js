@@ -69,6 +69,14 @@ function promptPlayer2() {
 
 var howManyClicks = 0;
 
+var player1Win = 0;
+$scope.player1win_count = player1Win;
+var player2Win = 0;
+$scope.player2win_count = player2Win;
+
+var howManyTies = 0;
+$scope.tie_count = howManyTies;
+
 $scope.clickIt = function(box) {
 	// if our box has been clicked if box.clicked
 	// equal true
@@ -121,6 +129,11 @@ $scope.clickIt = function(box) {
             if ($scope.boxes[2].odd && $scope.boxes[4].odd && $scope.boxes[6].odd ) {
                     pinkWin();
             }
+            if (howManyClicks == 9) {
+                alert("It's tied!");
+                howManyTies++;
+                $scope.tie_count = howManyTies;
+            }
         } 
 	    else {
 			box.even = true;
@@ -171,6 +184,8 @@ pinkWin = function () {
     $timeout(function() {
          alert( $scope.player_1 + " win!" );
          $scope.clickIt = false;
+         player1Win++;
+         $scope.player1win_count = player1Win++;
     }, 300); 
 };
 
@@ -178,6 +193,8 @@ blueWin = function () {
    $timeout(function() {
          alert( $scope.player_2 + " win!" );
          $scope.clickIt = false;
+         player2Win++;
+         $scope.player2win_count = player2Win++;
     }, 300); 
 };
 

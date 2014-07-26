@@ -22,8 +22,12 @@
 		<div id="data" class="clearfix">
 			<button id="playAgain" ng-click="clickToReload() | filter: clickIt == false">Play again?</button>
 		</div>
-		<div id="player1">{{ player_1 }}</div>
-		<div id="player2">{{ player_2 }}</div>
+		<div id="data2" class="clearfix">
+			<button id="playAgain2" ng-click="clickToReload()">Wanna play with someone else?</button>
+		</div>
+		<div id="player1">{{ player_1 }}<span>: </span>{{ player1win_count }}</div>
+		<div id="player2">{{ player_2 }}<span>: </span>{{ player2win_count }}</div>
+		<div><p id="tiebar">Tie: {{ tie_count }}</p></div>
 		<div class="board clearfix">
 		    <div id="game" ng-repeat="box in boxesContainer.boxList" ng-click="clickIt(box)" ng-class="{pink: box.odd, blue: box.even}"></div>{{box}}</div>
 		</div>

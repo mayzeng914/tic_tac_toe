@@ -23,7 +23,7 @@ header {
     width: 350px;
     border-collapse: collapse;
     margin: 0;
-    margin-left: 92%;
+    margin-left: 90%;
 }
 
 /* Clearfix 
@@ -39,12 +39,6 @@ header {
 
 .board {
     margin-top: 16%;
-}
-
-#data {
-    float: right;
-    margin-right: -73%;
-    margin-top: 23%;
 }
 #player1 {
     float:left;
@@ -82,6 +76,34 @@ header {
     background-color: white;
     color: lightblue;
 }
+#tiebar {
+    float:left;
+    margin-left: -108%;
+    margin-top: 74%;
+    background-color: grey;
+    border-radius: 25px;
+    border: 0;
+    text-shadow: 1px -1px;
+    font-family: 'Gloria Hallelujah', cursive;
+    color: white;
+    font-size: 24px;
+    padding: 11px;
+}
+#tiebar:hover {
+    margin-top: 73%;
+    background-color: white;
+    color: grey;
+}
+#data {
+    float: right;
+    margin-right: -73%;
+    margin-top: 23%;
+}
+#data2 {
+    float: right;
+    margin-right: -126%;
+    margin-top: 43%;
+}
 #playAgain {
     background-color: #FEF49B;
     border-radius: 25px;
@@ -92,9 +114,24 @@ header {
     font-size: 19px;
     padding: 11px;
 }
+#playAgain2 {
+    background-color: #FEF49B;
+    border-radius: 25px;
+    border: 0;
+    text-shadow: 1px -1px;
+    font-family: 'Gloria Hallelujah', cursive;
+    color: #EB1B28;
+    font-size: 19px;
+    padding: 11px;
+}
 #playAgain:hover {
-    background: grey;
-    color: white;
+    background: #EB1B28;
+    color: #FEF49B;
+    filter: alpha(opacity=20);
+}
+#playAgain2:hover {
+    background: #EB1B28;
+    color: #FEF49B;
     filter: alpha(opacity=20);
 }
 #game {

@@ -16,13 +16,17 @@
 <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
 
 </head>
-<body>
-	<header>Tic Tac Toe</header>
-	<div id="container" ng-controller="tttController" ng-model="boxesContainer">
-		<div id="data">
-			<button id="playAgain" ng-click="clickToReload() | filter: clickIt == false">Let's start it!</button>
+<body class="clearfix">
+	<header class="clearfix">Tic Tac Toe</header>
+	<div class="clearfix" id="container" ng-controller="tttController" ng-model="boxesContainer">
+		<div id="data" class="clearfix">
+			<button id="playAgain" ng-click="clickToReload() | filter: clickIt == false">Play again?</button>
 		</div>
-		<div id="game" ng-repeat="box in boxesContainer.boxList" ng-click="clickIt(box)" ng-class="{pink: box.odd, blue: box.even}"></div>{{box}}</div>
+		<div id="player1">{{ player_1 }}</div>
+		<div id="player2">{{ player_2 }}</div>
+		<div class="board clearfix">
+		    <div id="game" ng-repeat="box in boxesContainer.boxList" ng-click="clickIt(box)" ng-class="{pink: box.odd, blue: box.even}"></div>{{box}}</div>
+		</div>
 	<div><img class="background" src="heart.jpg"/></div>
 	<header></header>
 	

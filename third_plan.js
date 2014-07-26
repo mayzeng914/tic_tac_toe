@@ -1,6 +1,6 @@
 var tttapp = angular.module('tttapp', ["firebase"]);
 
-tttapp.controller('tttController', function($scope, $timeout, $firebase) {
+tttapp.controller('tttController', function($scope, $timeout, $firebase, $filter) {
 
 var firebaseRef = new Firebase("https://shining-fire-3332.firebaseio.com/");
 
@@ -37,8 +37,37 @@ $scope.$watch('boxesContainer', function() {
     console.log('things changed!');
 });
 
-var howManyClicks = 0;
+//Beginning prompts
+window.onload = function() {
+    promptPlayer1();
+};
 
+//player 1 check in
+function promptPlayer1() { 
+        var player_name_1 = prompt("Player 1, enter your name below (no more than 10 characters):");
+        if ( (player_name_1 == null) || (player_name_1.length > 10) || (player_name_1.length == 0) ) {
+            promptPlayer1();
+        }
+        else {
+            $scope.player_1 = player_name_1;
+            promptPlayer2();
+        };
+};
+
+//player 2 check in
+function promptPlayer2() {
+        var player_name_2 = prompt("Player 2, enter your name below (no more than 10 characters):");
+        if ( (player_name_2 == null) || (player_name_2.length > 10) || (player_name_2.length == 0) ) {
+            promptPlayer2();
+        }
+        else {
+            $scope.player_2 = player_name_2;
+            alert( $scope.player_1 + " (pink) goes first!");
+        };
+};
+
+
+var howManyClicks = 0;
 
 $scope.clickIt = function(box) {
 	// if our box has been clicked if box.clicked
@@ -140,26 +169,21 @@ $scope.clickIt = function(box) {
 //winning alert (extra: try to print it out under the page! and stop the game; and ask for play again!)
 pinkWin = function () {
     $timeout(function() {
-         alert("Pink win!");
+         alert( $scope.player_1 + " win!" );
          $scope.clickIt = false;
     }, 300); 
 };
 
 blueWin = function () {
    $timeout(function() {
-         alert("Blue win!");
+         alert( $scope.player_2 + " win!" );
          $scope.clickIt = false;
     }, 300); 
 };
 
-//button: wanna play again? (reload the page)
+//purpose: only reload the board!
 $scope.clickToReload = function() {
-    // window.location.reload();
-    for ( i=0; i < $scope.boxes.length; i++ ) {
-        $scope.boxes[i].clicked = false;
-        howManyClicks = 0;
-    }
-    console.log('hello');
+     window.location.reload();
 };
 //firebase
 //extra: animation of clicking; color choosing and player name choosing; game record (how many recend round? how many times per player win?)

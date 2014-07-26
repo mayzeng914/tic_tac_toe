@@ -133,6 +133,7 @@ $scope.clickIt = function(box) {
                 alert("It's tied!");
                 howManyTies++;
                 $scope.tie_count = howManyTies;
+                nextRound();
             }
         } 
 	    else {
@@ -182,40 +183,56 @@ $scope.clickIt = function(box) {
 //winning alert (extra: try to print it out under the page! and stop the game; and ask for play again!)
 pinkWin = function () {
     $timeout(function() {
-         alert( $scope.player_1 + " win!" );
-         player1Win++;
-         $scope.player1win_count = player1Win;
-         for ( i = 0; i <= 8; i++ ) {
+        alert( $scope.player_1 + " win!" );
+        player1Win++;
+        $scope.player1win_count = player1Win;
+        for ( i = 0; i <= 8; i++ ) {
             if ($scope.boxes[i].clicked == false) {
                 $scope.boxes[i].clicked = true;
             };
-         };
+        };
+        nextRound();
     }, 300); 
 };
 
 blueWin = function () {
    $timeout(function() {
-         alert( $scope.player_2 + " win!" );
-         player2Win++;
-         $scope.player2win_count = player2Win;
-         for ( i = 0; i <= 8; i++ ) {
+        alert( $scope.player_2 + " win!" );
+        player2Win++;
+        $scope.player2win_count = player2Win;
+        for ( i = 0; i <= 8; i++ ) {
             if ($scope.boxes[i].clicked == false) {
                 $scope.boxes[i].clicked = true;
             };
-         };
+        };
+        nextRound();
     }, 300); 
+};
+
+function nextRound() {
+    console.log(player1Win + player2Win + howManyTies);
+    if ( (player1Win + player2Win + howManyTies) == 15) {
+        var askForReplacement = confirm("You have been played for 15 rounds! Why not save some time for the others?");
+        if (askForReplacement) {
+            window.location.reload();
+        }
+        else {
+            alert("Sorry we have to reset your game!");
+            window.location.reload();
+        }
+    }
 };
 
 //purpose: only reload the board!
 $scope.clickToReloadBoard = function() {
-     for ( i = 0; i < 9; i++ ) {
+    for ( i = 0; i < 9; i++ ) {
         $scope.boxes[i].odd = false;
         $scope.boxes[i].even = false;
         $scope.boxes[i].clicked = false;
         howManyClicks = 0;
-     }
+    };
 };
-$scope.clickToReload = function() {
+$scope.clickToReloadPage = function() {
      window.location.reload();
 };
 //firebase

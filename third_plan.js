@@ -1,13 +1,13 @@
 var tttapp = angular.module('tttapp', ["firebase"]);
 
-tttapp.controller('tttController', function($scope, $timeout, $firebase, $filter) {
+tttapp.controller('tttController', function($scope, $timeout, $firebase) {
 
 var firebaseRef = new Firebase("https://shining-fire-3332.firebaseio.com/");
 
 $scope.remoteBoxesContainer = 
     $firebase(new Firebase("https://shining-fire-3332.firebaseio.com" + '/remoteBoxesContainer')) ;
 
-// $scope.createdBoard 
+// $scope.createdBoard
 $scope.boxes = [{
         clicked: false
     }, {
@@ -183,22 +183,38 @@ $scope.clickIt = function(box) {
 pinkWin = function () {
     $timeout(function() {
          alert( $scope.player_1 + " win!" );
-         $scope.clickIt = false;
          player1Win++;
-         $scope.player1win_count = player1Win++;
+         $scope.player1win_count = player1Win;
+         for ( i = 0; i <= 8; i++ ) {
+            if ($scope.boxes[i].clicked == false) {
+                $scope.boxes[i].clicked = true;
+            };
+         };
     }, 300); 
 };
 
 blueWin = function () {
    $timeout(function() {
          alert( $scope.player_2 + " win!" );
-         $scope.clickIt = false;
          player2Win++;
-         $scope.player2win_count = player2Win++;
+         $scope.player2win_count = player2Win;
+         for ( i = 0; i <= 8; i++ ) {
+            if ($scope.boxes[i].clicked == false) {
+                $scope.boxes[i].clicked = true;
+            };
+         };
     }, 300); 
 };
 
 //purpose: only reload the board!
+$scope.clickToReloadBoard = function() {
+     for ( i = 0; i < 9; i++ ) {
+        $scope.boxes[i].odd = false;
+        $scope.boxes[i].even = false;
+        $scope.boxes[i].clicked = false;
+        howManyClicks = 0;
+     }
+};
 $scope.clickToReload = function() {
      window.location.reload();
 };

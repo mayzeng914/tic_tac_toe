@@ -54,7 +54,6 @@ header {
     padding: 11px;
 }
 #player1:hover {
-    margin-top: 23%;
     background-color: white;
     color: pink;
 }
@@ -72,7 +71,6 @@ header {
     padding: 11px;
 }
 #player2:hover {
-    margin-top: 48%;
     background-color: white;
     color: lightblue;
 }
@@ -90,7 +88,6 @@ header {
     padding: 11px;
 }
 #tiebar:hover {
-    margin-top: 73%;
     background-color: white;
     color: grey;
 }
@@ -103,6 +100,12 @@ header {
     float: right;
     margin-right: -126%;
     margin-top: 43%;
+}
+#data:hover {
+    margin-top: 22%;
+}
+#data2:hover {
+    margin-top: 42%;
 }
 #playAgain {
     background-color: #FEF49B;
@@ -125,14 +128,30 @@ header {
     padding: 11px;
 }
 #playAgain:hover {
-    background: #EB1B28;
-    color: #FEF49B;
+    color: #EB1B28;
     filter: alpha(opacity=20);
 }
 #playAgain2:hover {
-    background: #EB1B28;
-    color: #FEF49B;
+    color: #EB1B28;
     filter: alpha(opacity=20);
+}
+#turn {
+    background-color: #FEF49B;
+    color: grey;
+    text-shadow: 1px -1px;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 27px;
+    margin-left: 23%;
+    margin-top: 10%;
+}
+#turn:hover {
+    margin-top: 11%;
+}
+.textpink {
+    color: pink;
+}
+.textblue {
+    color: lightblue;
 }
 #game {
     /*background: white;*/

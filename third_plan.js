@@ -7,7 +7,7 @@ var firebaseRef = new Firebase("https://shining-fire-3332.firebaseio.com/");
 $scope.remoteBoxesContainer = 
     $firebase(new Firebase("https://shining-fire-3332.firebaseio.com" + '/remoteBoxesContainer')) ;
 
-// $scope.createdBoard
+//created the board
 $scope.boxes = [{
         clicked: false
     }, {
@@ -37,6 +37,34 @@ $scope.$watch('boxesContainer', function() {
     console.log('things changed!');
 });
 
+//define turns
+var turnStatus = '';
+
+//define player 1's turn
+function turning1(){
+    turnStatus = player_name_1 + "'s turn";
+    $scope.turn_status = turnStatus;
+    turncolor.colorpink = true;
+    turncolor.colorblue = false;
+    console.log("pink " + turncolor.colorpink + " and blue " + turncolor.colorblue);
+};
+
+//define player 2's turn
+function turning2(){
+    turnStatus = player_name_2 + "'s turn";
+    $scope.turn_status = turnStatus;
+    turncolor.colorpink = false;
+    turncolor.colorblue = true;
+    console.log("pink " + turncolor.colorpink + " and blue " + turncolor.colorblue);
+};
+
+var turncolor = [];
+
+//initial status
+var player_name_1 = "player 1";
+var player_name_2 = "player 2";
+$scope.tie_count = "Tie";
+   
 //Beginning prompts
 window.onload = function() {
     promptPlayer1();
@@ -44,38 +72,44 @@ window.onload = function() {
 
 //player 1 check in
 function promptPlayer1() { 
-        var player_name_1 = prompt("Player 1, enter your name below (no more than 10 characters):");
+        player_name_1 = prompt("Player 1, enter your name below\n(no more than 10 characters):");
         if ( (player_name_1 == null) || (player_name_1.length > 10) || (player_name_1.length == 0) ) {
             promptPlayer1();
         }
         else {
-            $scope.player_1 = player_name_1;
+            $scope.player1Status = player_name_1 + ": " + player1Win;
             promptPlayer2();
         };
 };
 
 //player 2 check in
 function promptPlayer2() {
-        var player_name_2 = prompt("Player 2, enter your name below (no more than 10 characters):");
+        player_name_2 = prompt("Player 2, enter your name below\n(no more than 10 characters):");
         if ( (player_name_2 == null) || (player_name_2.length > 10) || (player_name_2.length == 0) ) {
             promptPlayer2();
         }
         else {
-            $scope.player_2 = player_name_2;
-            alert( $scope.player_1 + " (pink) goes first!");
+            $scope.player2Status = player_name_2 + ": " + player2Win;
+            $scope.tie_count = "Tie: " + howManyTies;
+            turnStatus = player_name_1 + " goes first!";
+            $scope.turn_status = turnStatus;
+            turncolor.colorpink = true;
+            console.log("pink " + turncolor.colorpink);
         };
 };
 
-
-var howManyClicks = 0;
-
+//game is ready
 var player1Win = 0;
-$scope.player1win_count = player1Win;
+$scope.player1Status = player_name_1; 
 var player2Win = 0;
-$scope.player2win_count = player2Win;
+$scope.player2Status = player_name_2; 
 
 var howManyTies = 0;
-$scope.tie_count = howManyTies;
+var player1WinCount = 0;
+var player2WinCount = 0;
+
+//game starts
+var howManyClicks = 0;
 
 $scope.clickIt = function(box) {
 	// if our box has been clicked if box.clicked
@@ -93,8 +127,10 @@ $scope.clickIt = function(box) {
 
 	    // odd check
 	    if (howManyClicks % 2 == 1) {
-            box.odd = true; 
-            //check each row of the first player
+            //player 1
+            box.odd = true;
+            //check player 1's winning status
+            //check each row of player 1
             for (var i = 0; i <= 8; i += 3) {
                 var boxSelectedOddRow = [];
                 for (var z = 0; z <= 2; z++) {
@@ -103,12 +139,12 @@ $scope.clickIt = function(box) {
                         boxSelectedOddRow.push("win");
                     }
                 }
-                //check if the first player win the row
+                //check if player 1 win the row
                 if (boxSelectedOddRow.length == 3) {
-                    pinkWin();
+                    player1WinCount++;
                 }
             };
-            //check each column of the first player
+            //check each column of player 1
             for (var i = 0; i <= 2; i++) {
                 var boxSelectedOddColumn = [];
                 for (var z = 0; z <= 8; z += 3) {
@@ -116,29 +152,44 @@ $scope.clickIt = function(box) {
                         boxSelectedOddColumn.push("win");
                     }
                 }
-                //check if the first player win the column
+                //check if player 1 win the column
                 if (boxSelectedOddColumn.length == 3) {
-                    pinkWin();
+                    player1WinCount++;
                 }
             };
             //check the first digonal
             if ($scope.boxes[0].odd && $scope.boxes[4].odd && $scope.boxes[8].odd ) {
-                    pinkWin();
-            }
+                    player1WinCount++;
+            };
             //check the second digonal
             if ($scope.boxes[2].odd && $scope.boxes[4].odd && $scope.boxes[6].odd ) {
-                    pinkWin();
-            }
-            if (howManyClicks == 9) {
-                alert("It's tied!");
+                    player1WinCount++;
+            };
+            //change to player 2's turn
+            if ( (howManyClicks < 9) && (player1WinCount == 0) ) {
+                turning2(); 
+            };
+            //game is tied
+            if ( (howManyClicks == 9) && (player1WinCount == 0) ) {
                 howManyTies++;
-                $scope.tie_count = howManyTies;
+                $scope.tie_count = "Tie: " + howManyTies;
+                turnStatus = "It's tied!";
                 nextRound();
-            }
-        } 
+                $scope.turn_status = turnStatus;
+                turncolor.colorpink = false;
+                urncolor.colorblue = false;
+                console.log("pink " + turncolor.colorpink + " and blue " + turncolor.colorblue);
+            };
+            //check if player 1 win
+            if (player1WinCount > 0) {
+                pinkWin();
+            };
+        }
 	    else {
+            //player 2
 			box.even = true;
-            //check each row of the second player
+            //check player 2's winning status
+            //check each row of player 2
             for (var i = 0; i <= 8; i += 3) {
                 var boxSelectedEvenRow = [];
                 for (var z = 0; z <= 2; z++) {
@@ -147,12 +198,12 @@ $scope.clickIt = function(box) {
                         boxSelectedEvenRow.push("win");
                     }
                 }
-                //check if the second player win the
+                //check if player 2 win the
                 if (boxSelectedEvenRow.length == 3) {
                     blueWin();
                 }
-            }
-            //check each column of the second player
+            };
+            //check each column of player 2
             for (var i = 0; i <= 2; i++) {
                 var boxSelectedEvenColumn = [];
                 for (var z = 0; z <= 8; z += 3) {
@@ -161,84 +212,124 @@ $scope.clickIt = function(box) {
                         boxSelectedEvenColumn.push("win");
                     }
                 }
-                //check if the second player win the column
+                //check if player 2 win the column
                 if (boxSelectedEvenColumn.length == 3) {
-                    blueWin();
+                    player2WinCount++;
                 }
-            }
+            };
             //check the first digonal
             if ($scope.boxes[0].even && $scope.boxes[4].even && $scope.boxes[8].even ) {
                     console.log(boxes[0], boxes[4], boxes[8]);
-                    blueWin();
-            }
+                    player2WinCount++;
+            };
             //check the second dogonal
             if ($scope.boxes[2].even && $scope.boxes[4].even && $scope.boxes[6].even ) {
                     console.log(boxes[2], boxes[4], boxes[6]);
-                    blueWin();
-            }
-	    }
-    }	
+                    player2WinCount++;
+            };
+            //change to player 1's turn
+            if (player2WinCount == 0) {
+                turning1();
+            };
+            if (player2WinCount > 0) {
+                blueWin();
+            };
+	    };
+    };	
 };
 
-//winning alert (extra: try to print it out under the page! and stop the game; and ask for play again!)
+//when player 1 wins
 pinkWin = function () {
     $timeout(function() {
-        alert( $scope.player_1 + " win!" );
+        turnStatus = player_name_1 + " (pink) win!";
+        $scope.turn_status = turnStatus;
         player1Win++;
-        $scope.player1win_count = player1Win;
+        $scope.player1Status = player_name_1 + ": " + player1Win;
         for ( i = 0; i <= 8; i++ ) {
             if ($scope.boxes[i].clicked == false) {
                 $scope.boxes[i].clicked = true;
             };
         };
         nextRound();
-    }, 300); 
+        turncolor.colorpink = true;
+        turncolor.colorblue = false;
+        console.log("pink " + turncolor.colorpink + " and blue " + turncolor.colorblue);
+
+    }, 10); 
 };
 
+//when player 2 wins
 blueWin = function () {
    $timeout(function() {
-        alert( $scope.player_2 + " win!" );
+        turnStatus = player_name_2 + " (blue) win!";
+        $scope.turn_status = turnStatus;
         player2Win++;
-        $scope.player2win_count = player2Win;
+        $scope.player2Status = player_name_2 + ": " + player2Win;
         for ( i = 0; i <= 8; i++ ) {
             if ($scope.boxes[i].clicked == false) {
                 $scope.boxes[i].clicked = true;
             };
         };
         nextRound();
-    }, 300); 
+        turncolor.colorpink = false;
+        turncolor.colorblue = true;
+        console.log("pink " + turncolor.colorpink + " and blue " + turncolor.colorblue);
+    }, 10); 
 };
 
+//change players after 15 rounds
 function nextRound() {
-    console.log(player1Win + player2Win + howManyTies);
-    if ( (player1Win + player2Win + howManyTies) == 15) {
-        var askForReplacement = confirm("You have been played for 15 rounds! Why not save some time for the others?");
-        if (askForReplacement) {
-            window.location.reload();
+    $timeout(function() {
+        console.log( player1Win + player2Win + howManyTies );
+        if ( (player1Win + player2Win + howManyTies) == 3) {
+            var askForReplacement = confirm("You have been played for 15 rounds!\nWhy not save some time for the others?");
+            if (askForReplacement) {
+                window.location.reload();
+            }
+            else {
+                alert("Sorry we have to reset your game!");
+                window.location.reload();
+            }
         }
-        else {
-            alert("Sorry we have to reset your game!");
-            window.location.reload();
-        }
-    }
+    }, 700); 
 };
 
-//purpose: only reload the board!
+//only reload the board
 $scope.clickToReloadBoard = function() {
-    for ( i = 0; i < 9; i++ ) {
-        $scope.boxes[i].odd = false;
-        $scope.boxes[i].even = false;
-        $scope.boxes[i].clicked = false;
-        howManyClicks = 0;
+    if ( (player1WinCount > 0) || (player2WinCount > 0) || (howManyClicks == 9) ) { 
+        for ( i = 0; i < 9; i++ ) {
+            $scope.boxes[i].odd = false;
+            $scope.boxes[i].even = false;
+            $scope.boxes[i].clicked = false;
+            howManyClicks = 0;
+            player1WinCount = 0;
+            player2WinCount = 0;
+            turncolor.colorpink = true;
+            turncolor.colorblue = false;
+            turnStatus = player_name_1 + " goes first!";
+            $scope.turn_status = turnStatus;
+            console.log("pink " + turncolor.colorpink);
+        };
+    }
+    else {
+        alert("You haven't complete this round yet!");
     };
 };
+
+//reload the page
 $scope.clickToReloadPage = function() {
-     window.location.reload();
+    if ( (player1WinCount > 0) || (player2WinCount > 0) || (howManyClicks == 9) ) {
+         window.location.reload();
+    }
+    else {
+        var playWithNew = confirm("Are you sure you wanna leave the game right now?\nYou still have " + ( 15 - player1Win - player2Win - howManyTies ) + " round(s) to go!\nClick \"OK\" to continue the game;\nClick \"Cancel\" to start a new game with someone else.");
+        if (!playWithNew) {
+            window.location.reload();
+        };
+    };
 };
+
 //firebase
-//extra: animation of clicking; color choosing and player name choosing; game record (how many recend round? how many times per player win?)
-
-
 
 });
 

@@ -112,21 +112,21 @@ var player2WinCount = 0;
 var howManyClicks = 0;
 
 $scope.clickIt = function(box) {
-	// if our box has been clicked if box.clicked
-	// equal true
-			// Then do nothing, don't increment, etc
-	// if its false,
-			// Then our box's clicked property to be true
-			// increment how many clicks
-			// if odd, set box.odd  = true
-			// else box.even = true
-	if (box.clicked == false) {
-		box.clicked = true;
-		howManyClicks++;
-	    // howManyClicks => 1
+    // if our box has been clicked if box.clicked
+    // equal true
+            // Then do nothing, don't increment, etc
+    // if its false,
+            // Then our box's clicked property to be true
+            // increment how many clicks
+            // if odd, set box.odd  = true
+            // else box.even = true
+    if (box.clicked == false) {
+        box.clicked = true;
+        howManyClicks++;
+        // howManyClicks => 1
 
-	    // odd check
-	    if (howManyClicks % 2 == 1) {
+        // odd check
+        if (howManyClicks % 2 == 1) {
             //player 1
             box.odd = true;
             //check player 1's winning status
@@ -185,9 +185,9 @@ $scope.clickIt = function(box) {
                 pinkWin();
             };
         }
-	    else {
+        else {
             //player 2
-			box.even = true;
+            box.even = true;
             //check player 2's winning status
             //check each row of player 2
             for (var i = 0; i <= 8; i += 3) {
@@ -234,8 +234,8 @@ $scope.clickIt = function(box) {
             if (player2WinCount > 0) {
                 blueWin();
             };
-	    };
-    };	
+        };
+    };  
 };
 
 //when player 1 wins
@@ -282,7 +282,7 @@ function nextRound() {
     $timeout(function() {
         console.log( player1Win + player2Win + howManyTies );
         if ( (player1Win + player2Win + howManyTies) == 3) {
-            var askForReplacement = confirm("You have been played for 15 rounds!\nWhy not save some time for the others?");
+            var askForReplacement = confirm("You have been played for 3 rounds!\nWhy not save some time for the others?");
             if (askForReplacement) {
                 window.location.reload();
             }
@@ -319,17 +319,22 @@ $scope.clickToReloadBoard = function() {
 //reload the page
 $scope.clickToReloadPage = function() {
     if ( (player1WinCount > 0) || (player2WinCount > 0) || (howManyClicks == 9) ) {
-         window.location.reload();
-    }
-    else {
-        var playWithNew = confirm("Are you sure you wanna leave the game right now?\nYou still have " + ( 15 - player1Win - player2Win - howManyTies ) + " round(s) to go!\nClick \"OK\" to continue the game;\nClick \"Cancel\" to start a new game with someone else.");
+        var playWithNew = confirm("Are you sure you wanna leave the game right now?\nYou still have " + ( 3 - player1Win - player2Win - howManyTies ) + " round(s) to go!\nClick \"OK\" to continue the game;\nClick \"Cancel\" to start a new game with someone else.");
         if (!playWithNew) {
             window.location.reload();
         };
+    }
+    else if ( (player1Win == 0) && (player2Win == 0) && (howManyTies == 0) && (howManyClicks == 0) ) {
+        var playWithNew = confirm("Are you sure you wanna leave the game right now?\nYou don't even start it yet!\nClick \"OK\" to continue the game;\nClick \"Cancel\" to start a new game with someone else.");
+        if (!playWithNew) {
+            window.location.reload();
+        };
+    }
+    else {
+        alert("You haven't complete this round yet!");
     };
 };
 
 //firebase
 
 });
-

@@ -8,6 +8,7 @@ body {
 header {
 	font-family: 'Gloria Hallelujah', cursive;
     font-size: 80px;
+    color: lightyellow;
     float: left;
     margin-left: 80%;
     width: 800px;

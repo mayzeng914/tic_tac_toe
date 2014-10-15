@@ -29,9 +29,12 @@
 		<div id="player2">{{ player2Status }}</div>
 		<div><p id="tiebar">{{ tie_count }}</p></div>
 		<div class="board clearfix">
-		    <div id="game" ng-repeat="box in boxesContainer.boxList" ng-click="clickIt(box)" ng-class="{pink: box.odd, blue: box.even}"></div>{{box}}</div>
-		    <div id="turn" ng-class="{textpink: turncolor.colorpink, textblue: turncolor.colorblue}">{{ turn_status }}</div>
+		    <div id="game" ng-repeat="box in boxesContainer.boxList" ng-click="clickIt(box)" ng-class="{pink: box.odd, blue: box.even}">
+			</div>
+			{{box}}
 		</div>
+			    <div id="turn" ng-class="{textpink: turncolor.colorpink, textblue: turncolor.colorblue}">{{ boxesContainer.turning }}</div>
+			</div>
 	<div><img class="background" src="heart.jpg"/></div>
 	<header></header>
 	
